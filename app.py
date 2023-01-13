@@ -1,6 +1,7 @@
 from tests import selecting_values, calculus, checking_answer
 from saving_logs import append_log, adjusting_data
 import os 
+import time 
 
 def main():
     
@@ -10,11 +11,19 @@ def main():
 
     points = 0 
     values = selecting_values(number_exs)
+    
+    init = time.time() # when the calculation starts
     answer = calculus(values)
+    end = time.time() # when the calculation ends
+    
     logs = False 
     
     # cleaning to show the accuracy and the right answers
     os.system('clear')
+    
+    # test time
+    test_duration = end - init
+    test_duration = time.strftime("%Mmin %Ss", time.gmtime(test_duration)) # formating the time
     
     for a, b, op, user_answer in answer:
         result, right_answer = checking_answer(a, b, op, user_answer)
@@ -24,8 +33,9 @@ def main():
         
     accuracy = round(points/len(values), 2)*100
     print(f'Acurácia --> {accuracy}% ')
+    print(f'Tempo -->  {test_duration}')
     
-    df = append_log(logs, accuracy, len(values)) # formating df 
+    df = append_log(logs, accuracy, len(values),test_duration) # formating df 
     df.to_csv('logs.csv', mode='a', index=False) # savng df in csv
     
     
