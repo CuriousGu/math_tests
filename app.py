@@ -36,7 +36,7 @@ def main():
     print(f'Tempo -->  {test_duration}')
     
     df = append_log(logs, accuracy, len(values),test_duration) # formating df 
-    df.to_csv('logs.csv', mode='a', index=False) # savng df in csv
+    df.to_csv('logs.csv', mode='a', index=False, header=False) # savng df in csv
     
     
 if __name__ == "__main__":

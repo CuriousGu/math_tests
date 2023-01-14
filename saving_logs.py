@@ -2,15 +2,16 @@ import pandas as pd
 from datetime import datetime
 
 
-def append_log(df, accuracy, total_exercises):
+def append_log(df, accuracy, total_exercises, time_spent):
     
-    columns = ['+', '-', '*', '/', 'total_accuracy', 'total_exercises', 'date']
+    columns = ['+', '-', '*', '/', 'total_accuracy', 'total_exercises', 'date', "time_spent"]
     values = df['operation'].value_counts().to_dict() # creating the dict with all the row's infos
    
     # adding the other infos to the same df, to convert it into a df
     values['total_accuracy'] = accuracy
     values['total_exercises'] = total_exercises
     values['date'] = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+    values["time_spent"] = time_spent
     
     df = pd.DataFrame(columns=columns, data=[values])
     return df

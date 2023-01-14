@@ -19,7 +19,7 @@ def selecting_values(number_exs):
 # printing the operation
 def calculus(values): # enter a list with the values and operations
     
-    answer = list()
+    answer = list() # list with user's answers
     
     for a, b, op in values:
         result = float(input(f'{a} {op} {b} = '))
